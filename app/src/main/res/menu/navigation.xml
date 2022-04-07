@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:menuCategory="secondary"
+        android:id="@+id/navigation_home"
+        android:icon="@mipmap/ic_home"
+        android:title="@string/str_home"/>
+
+    <item
+        android:menuCategory="secondary"
+        android:id="@+id/navigation_search"
+        android:icon="@mipmap/ic_search"
+        android:title="@string/str_search"/>
+
+    <item
+        android:menuCategory="secondary"
+        android:id="@+id/navigation_upload"
+        android:icon="@mipmap/ic_camera"
+        android:title="@string/str_upload"/>
+
+    <item
+        android:menuCategory="secondary"
+        android:id="@+id/navigation_favorite"
+        android:icon="@mipmap/ic_favorite"
+        android:title="@string/str_favorite"/>
+
+    <item
+        android:menuCategory="secondary"
+        android:id="@+id/navigation_profile"
+        android:icon="@mipmap/ic_profile"
+        android:title="@string/str_profile"/>
+</menu>

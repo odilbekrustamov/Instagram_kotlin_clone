@@ -9,4 +9,16 @@
     <string name="str_signup">Sign Up</string>
     <string name="str_already_accoumt">Already have an account</string>
     <string name="str_donot_account">Don\'t have an account</string>
+    <string name="str_home">Home</string>
+    <string name="str_search">Search</string>
+    <string name="str_upload">Upload</string>
+    <string name="str_favorite">Favorite</string>
+    <string name="str_profile">Profile</string>
+    <string name="str_caption">Write a caption</string>
+    <string name="str_follow">Folllow</string>
+    <string name="str_following">Folllowing</string>
+    <string name="str_followers">Folllowers</string>
+    <string name="str_posts">Posts</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

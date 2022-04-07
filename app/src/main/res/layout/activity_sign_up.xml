@@ -6,4 +6,109 @@
     android:layout_height="match_parent"
     tools:context=".activity.SignUpActivity">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/app_main_gradient"
+        android:gravity="center_vertical|center_horizontal"
+        android:orientation="vertical"
+        android:padding="25dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/custom_font"
+            android:text="@string/str_instagram"
+            android:textColor="#ffffff"
+            android:textSize="30sp"/>
+
+        <EditText
+            android:id="@+id/et_fullname"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/view_rounded_corners"
+            android:hint="@string/str_fullname"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#90ffffff"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/view_rounded_corners"
+            android:hint="@string/str_email"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#90ffffff"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/et_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/view_rounded_corners"
+            android:hint="@string/str_password"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#90ffffff"
+            android:textSize="16sp"/>
+
+        <EditText
+            android:id="@+id/et_cpassword"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/view_rounded_corners"
+            android:hint="@string/str_cpassword"
+            android:paddingLeft="15dp"
+            android:paddingRight="15dp"
+            android:textColor="#ffffff"
+            android:textColorHint="#90ffffff"
+            android:textSize="16sp"/>
+
+        <Button
+            android:id="@+id/b_signup"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/view_rounded_corners"
+            android:text="@string/str_signup"
+            android:textAllCaps="false"
+            android:textColor="#ffffff"
+            android:textSize="16sp"
+            app:backgroundTint="@null" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="right|center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/str_already_accoumt"
+                android:textColor="#ffffff"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_signin"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:paddingStart="10dp"
+                android:text="@string/str_signin"
+                android:textColor="#ffffff"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
