@@ -1,6 +1,5 @@
 package com.example.instagram.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -11,7 +10,7 @@ import com.example.instagram.R
  * In SignUpActivity, user can sighup using fullname, email, password
  */
 
-class SignUpActivity : AppCompatActivity() {
+class SignUpActivity : BaseActivity() {
     val TAG = SignUpActivity::class.java.simpleName
     lateinit var et_fullname: EditText
     lateinit var et_email: EditText
