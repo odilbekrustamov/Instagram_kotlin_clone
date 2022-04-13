@@ -90,7 +90,7 @@
                         android:id="@+id/iv_close"
                         android:layout_width="35dp"
                         android:layout_height="35dp"
-                        android:src="@drawable/ic_close"/>
+                        android:src="@mipmap/ic_close"/>
                 </LinearLayout>
             </FrameLayout>
         </FrameLayout>

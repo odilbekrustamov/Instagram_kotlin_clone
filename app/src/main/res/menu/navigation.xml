@@ -22,7 +22,7 @@
     <item
         android:menuCategory="secondary"
         android:id="@+id/navigation_favorite"
-        android:icon="@mipmap/ic_favorite"
+        android:icon="@mipmap/ic_favorite_not"
         android:title="@string/str_favorite"/>
 
     <item

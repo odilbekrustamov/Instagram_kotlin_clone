@@ -26,7 +26,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/str_instagram"
+                android:paddingStart="10dp"
+                android:text="@string/str_profile"
                 android:textColor="@color/black"
                 android:textSize="17sp"/>
 
@@ -42,13 +43,138 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center">
+        android:background="@color/white"
+        android:orientation="vertical">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="@string/str_profile"/>
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:layout_marginLeft="16dp"
+           android:layout_marginTop="20dp"
+           android:layout_marginRight="16dp"
+           android:layout_marginBottom="10dp"
+           android:gravity="center_horizontal"
+           android:orientation="vertical">
+
+           <FrameLayout
+               android:layout_width="65dp"
+               android:layout_height="65dp">
+
+               <com.google.android.material.imageview.ShapeableImageView
+                   android:id="@+id/iv_profile"
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:padding="2dp"
+                   android:src="@drawable/iv_percon"
+                   app:shapeAppearanceOverlay="@style/circle"
+                   app:strokeColor="@color/app_color_2"
+                   app:strokeWidth="2dp"/>
+
+               <LinearLayout
+                   android:layout_width="match_parent"
+                   android:layout_height="match_parent"
+                   android:gravity="right|bottom">
+
+                   <ImageView
+                       android:layout_width="20dp"
+                       android:layout_height="20dp"
+                       android:src="@mipmap/ic_plus"/>
+               </LinearLayout>
+           </FrameLayout>
+
+           <TextView
+               android:id="@+id/tv_fullname"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_marginTop="10dp"
+               android:text="@string/str_profile_name"
+               android:textColor="@color/black"
+               android:textSize="15sp"
+               android:textStyle="bold"/>
+
+           <TextView
+               android:id="@+id/tv_email"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="@string/str_email_text"
+               android:textSize="13sp"
+               android:textStyle="bold"/>
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="50dp"
+               android:layout_marginTop="10dp">
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center_horizontal|center_vertical"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="779"
+                       android:textColor="@color/black"
+                       android:textStyle="bold"/>
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/str_posts"/>
+
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center_horizontal|center_vertical"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="6825"
+                       android:textColor="@color/black"
+                       android:textStyle="bold"/>
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/str_followers"/>
+               </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="0dp"
+                   android:layout_height="match_parent"
+                   android:layout_weight="1"
+                   android:gravity="center_horizontal|center_vertical"
+                   android:orientation="vertical">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="649"
+                       android:textColor="@color/black"
+                       android:textStyle="bold"/>
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="@string/str_following"/>
+               </LinearLayout>
+           </LinearLayout>
+       </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
     </LinearLayout>
 
 

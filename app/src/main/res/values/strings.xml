@@ -21,4 +21,11 @@
     <string name="str_posts">Posts</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="str_name">Odilbek_79</string>
+    <string name="str_time">February 2, 2021</string>
+    <string name="str_caption_post">People-centric and expressive, with a new controls space and more privacy features.
+Extend your apps with conversation notifications and bubbles, try one-time permissions, surface devices and media in the controls.</string>
+    <string name="str_odilbek_79">odilbek_79</string>
+    <string name="str_email_text">odilbek79@gmail.com</string>
+    <string name="str_profile_name">Rustamov Odilbek</string>
 </resources>
