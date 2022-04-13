@@ -32,7 +32,7 @@
                 android:textSize="17sp"/>
 
             <ImageView
-                android:id="@+id/ic_camera"
+                android:id="@+id/ic_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@mipmap/ic_logout"

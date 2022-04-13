@@ -7,11 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.R
 import com.example.instagram.adapter.ProfileAdapter
+import com.example.instagram.manager.AuthManager
 import com.example.instagram.model.Post
 import com.example.instagram.utils.Logger
 import com.google.android.material.imageview.ShapeableImageView
@@ -25,6 +27,7 @@ import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 class ProfileFragment : Fragment() {
     val TAG = ProfileFragment::class.java.simpleName
     lateinit var rv_profile: RecyclerView
+    lateinit var ic_logout: ImageView
 
     var pickedPhoto: Uri? = null
     var allPhotos = ArrayList<Uri>()
@@ -48,6 +51,12 @@ class ProfileFragment : Fragment() {
         }
 
         refreshAdapter(loadPosts())
+
+        ic_logout = view.findViewById(R.id.ic_logout)
+        ic_logout.setOnClickListener {
+            AuthManager.signOut()
+            activity?.finish()
+        }
     }
 
     /**

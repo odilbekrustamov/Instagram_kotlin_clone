@@ -28,4 +28,9 @@ Extend your apps with conversation notifications and bubbles, try one-time permi
     <string name="str_odilbek_79">odilbek_79</string>
     <string name="str_email_text">odilbek79@gmail.com</string>
     <string name="str_profile_name">Rustamov Odilbek</string>
+
+    <string name="str_signin_success">Signed in Successfully</string>
+    <string name="str_signin_failed">Signed in failed</string>
+    <string name="str_signup_success">Signed up successfully</string>
+    <string name="str_signup_failed">Signed up failed</string>
 </resources>
