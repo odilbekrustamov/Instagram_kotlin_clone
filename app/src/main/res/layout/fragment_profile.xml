@@ -65,6 +65,7 @@
                    android:layout_width="match_parent"
                    android:layout_height="match_parent"
                    android:padding="2dp"
+                   android:scaleType="centerCrop"
                    android:src="@drawable/iv_percon"
                    app:shapeAppearanceOverlay="@style/circle"
                    app:strokeColor="@color/app_color_2"

@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.R
 import com.example.instagram.adapter.SearchAdapter
+import com.example.instagram.manager.DatabaseManager
+import com.example.instagram.manager.handler.DBUsersHandler
 import com.example.instagram.model.User
 
 /**
@@ -68,16 +70,18 @@ class SearchFragment : BaseFragment() {
     }
 
     private fun loadUsers(): ArrayList<User> {
-        items = ArrayList()
-        items.add(User("Odilbek_79", "odiljon@gmail.com"))
-        items.add(User("Alijon", "odiljon@gmail.com"))
-        items.add(User("Siroj", "odiljon@gmail.com"))
-        items.add(User("Javron", "odiljon@gmail.com"))
-        items.add(User("Jonibek", "odiljon@gmail.com"))
-        items.add(User("Ma'rufjon", "odiljon@gmail.com"))
-        items.add(User("SaidAhmad", "odiljon@gmail.com"))
-        items.add(User("Asliddin", "odiljon@gmail.com"))
+       DatabaseManager.loadUsers(object : DBUsersHandler{
+           override fun onSuccess(users: ArrayList<User>) {
+               items.clear()
+               items.addAll(users)
+               refreshAdapter(items)
+           }
 
+           override fun onError(e: Exception) {
+
+           }
+
+       })
         return items
     }
 }

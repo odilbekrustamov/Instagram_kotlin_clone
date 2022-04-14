@@ -1,4 +1,4 @@
-package com.example.instagram.manager
+package com.example.instagram.manager.handler
 
 import java.lang.Exception
 

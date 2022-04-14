@@ -8,13 +8,20 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.adapter.ProfileAdapter
 import com.example.instagram.manager.AuthManager
+import com.example.instagram.manager.DatabaseManager
+import com.example.instagram.manager.StorageManager
+import com.example.instagram.manager.handler.DBUserHandler
+import com.example.instagram.manager.handler.StorageHandler
 import com.example.instagram.model.Post
+import com.example.instagram.model.User
 import com.example.instagram.utils.Logger
 import com.google.android.material.imageview.ShapeableImageView
 import com.sangcomz.fishbun.FishBun
@@ -28,6 +35,9 @@ class ProfileFragment : Fragment() {
     val TAG = ProfileFragment::class.java.simpleName
     lateinit var rv_profile: RecyclerView
     lateinit var ic_logout: ImageView
+    lateinit var iv_profile: ImageView
+    lateinit var tv_fullname: TextView
+    lateinit var tv_email: TextView
 
     var pickedPhoto: Uri? = null
     var allPhotos = ArrayList<Uri>()
@@ -42,10 +52,15 @@ class ProfileFragment : Fragment() {
     }
 
     fun initViews(view: View) {
+        tv_fullname = view.findViewById(R.id.tv_fullname)
+        tv_email = view.findViewById(R.id.tv_email)
+
         rv_profile = view.findViewById(R.id.rv_profile)
         rv_profile.layoutManager = GridLayoutManager(activity, 2)
 
-        val iv_profile = view.findViewById<ShapeableImageView>(R.id.iv_profile)
+        loadUserInfo()
+
+        iv_profile = view.findViewById<ShapeableImageView>(R.id.iv_profile)
         iv_profile.setOnClickListener {
             pickFishBunPhoto()
         }
@@ -82,9 +97,40 @@ class ProfileFragment : Fragment() {
         }
 
     private fun uploadPickedPhoto(){
-        if (pickedPhoto != null){
-            Logger.d(TAG, pickedPhoto!!.path.toString())
-        }
+        StorageManager.uploadUserPhoto(pickedPhoto!!, object : StorageHandler{
+            override fun onSuccess(userImg: String) {
+                DatabaseManager.updateUserImage(userImg)
+                iv_profile.setImageURI(pickedPhoto)
+            }
+
+            override fun onError(e: Exception) {
+
+            }
+
+        })
+    }
+
+    private fun loadUserInfo(){
+        DatabaseManager.loadUser(AuthManager.currentUser()!!.uid, object : DBUserHandler{
+            override fun onSuccess(user: User?) {
+                if (user != null){
+                    showUserInfo(user)
+                }
+            }
+
+            override fun onError(e: Exception) {
+
+            }
+        })
+    }
+
+    private fun showUserInfo(user: User) {
+        tv_fullname.text = user.fullname
+        tv_email.text = user.email
+        Glide.with(this).load(user.userImg)
+            .placeholder(R.drawable.iv_percon)
+            .error(R.drawable.iv_percon)
+            .into(iv_profile)
     }
 
     private fun refreshAdapter(items: ArrayList<Post>){

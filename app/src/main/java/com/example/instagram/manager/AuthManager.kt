@@ -1,5 +1,6 @@
 package com.example.instagram.manager
 
+import com.example.instagram.manager.handler.AuthHandler
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -11,9 +12,10 @@ class AuthManager {
             return currentUser() != null
         }
 
-        private fun currentUser(): FirebaseUser? {
+        fun currentUser(): FirebaseUser? {
             return firebaseAuth.currentUser
         }
+
 
         fun signIn(email: String, password: String, handler: AuthHandler){
             firebaseAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener { task ->
@@ -21,7 +23,7 @@ class AuthManager {
                     val uid = currentUser()?.uid
                     handler.onSuccess(uid!!)
                 }else {
-                    handler.onError(task.exception!!)
+                    handler.onError(task.exception)
                 }
             }
         }

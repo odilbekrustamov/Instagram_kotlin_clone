@@ -2,13 +2,12 @@ package com.example.instagram.activity
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import com.example.instagram.R
-import com.example.instagram.manager.AuthHandler
+import com.example.instagram.manager.handler.AuthHandler
 import com.example.instagram.manager.AuthManager
 import com.example.instagram.utils.Extensions.toast
 import java.lang.Exception
