@@ -81,7 +81,7 @@ object DatabaseManager {
     }
 
     fun loadPosts(uid: String, handler: DBPostsHandler){
-        val reference = database.collection(USER_PATH).document(uid).collection(POST_PAHT)
+        val reference = database.collection(USER_PATH).document(uid).collection(POST_PAHT).orderBy("currentDate")
         reference.get().addOnCompleteListener {
             val posts = ArrayList<Post>()
             if (it.isSuccessful){
@@ -91,9 +91,11 @@ object DatabaseManager {
                     val postImg = document.getString("postImg")
                     val fullname = document.getString("fullname")
                     val userImg = document.getString("userImg")
+                    val time = document.getString("currentDate")
 
                     val post = Post(id!!, caption!!, postImg!!)
                     post.uid = uid
+                    post.currentDate = time!!
                     post.fullname = fullname!!
                     post.userImg = userImg!!
                     posts.add(post)
@@ -116,9 +118,11 @@ object DatabaseManager {
                     val postImg = document.getString("postImg")
                     val fullname = document.getString("fullname")
                     val userImg = document.getString("userImg")
+                    val time = document.getString("currentDate")
 
                     val post = Post(id!!, caption!!, postImg!!)
                     post.uid = uid
+                    post.currentDate = time!!
                     post.fullname = fullname!!
                     post.userImg = userImg!!
                     posts.add(post)

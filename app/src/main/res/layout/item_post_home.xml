@@ -36,7 +36,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/str_name"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tv_time"

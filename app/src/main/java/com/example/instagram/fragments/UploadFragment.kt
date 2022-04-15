@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,9 @@ import com.example.instagram.utils.Utils
 import com.sangcomz.fishbun.FishBun
 import com.sangcomz.fishbun.adapter.image.impl.GlideAdapter
 import java.lang.RuntimeException
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  *In UploadFragment, user can upload
@@ -138,6 +142,7 @@ class UploadFragment : BaseFragment() {
                         post.uid = uid
                         post.fullname = user!!.fullname
                         post.userImg = user.userImg
+
                         storePostToDB(post)
                     }
 
@@ -198,4 +203,5 @@ class UploadFragment : BaseFragment() {
     interface UploadListner{
         fun scrollToHome()
     }
+
 }
