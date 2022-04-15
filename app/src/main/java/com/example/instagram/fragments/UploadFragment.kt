@@ -12,6 +12,14 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.instagram.R
+import com.example.instagram.manager.AuthManager
+import com.example.instagram.manager.DatabaseManager
+import com.example.instagram.manager.StorageManager
+import com.example.instagram.manager.handler.DBPostHandler
+import com.example.instagram.manager.handler.DBUserHandler
+import com.example.instagram.manager.handler.StorageHandler
+import com.example.instagram.model.Post
+import com.example.instagram.model.User
 import com.example.instagram.utils.Logger
 import com.example.instagram.utils.Utils
 import com.sangcomz.fishbun.FishBun
@@ -112,13 +120,59 @@ class UploadFragment : BaseFragment() {
         }
 
     private fun uploadNewPost() {
-       listner!!.scrollToHome()
         val caption = et_caption.text.toString().trim()
         if (caption.isNotEmpty() && pickedPhoto != null){
-            Logger.d(TAG, caption)
-            Logger.d(TAG, pickedPhoto!!.path.toString())
-            resetAll()
+            uploadPostPhoto(caption, pickedPhoto!!)
         }
+    }
+
+    private fun uploadPostPhoto(caption: String, uri: Uri){
+        showLoading(requireActivity())
+        StorageManager.uploadPostPhoto(uri, object : StorageHandler{
+            override fun onSuccess(userImg: String) {
+                val post = Post(caption, userImg)
+                val uid = AuthManager.currentUser()!!.uid
+
+                DatabaseManager.loadUser(uid, object : DBUserHandler{
+                    override fun onSuccess(user: User?) {
+                        post.uid = uid
+                        post.fullname = user!!.fullname
+                        post.userImg = user.userImg
+                        storePostToDB(post)
+                    }
+
+                    override fun onError(e: Exception) {}
+                })
+            }
+
+            override fun onError(e: Exception) {}
+        })
+    }
+
+    private fun storePostToDB(post: Post) {
+        DatabaseManager.storePosts(post, object : DBPostHandler{
+            override fun onSuccess(post: Post) {
+                storeFeedToDB(post)
+            }
+
+            override fun onError(e: Exception) {
+                dismissLoading()
+            }
+        })
+    }
+
+    private fun storeFeedToDB(post: Post) {
+        DatabaseManager.storeFeeds(post, object : DBPostHandler{
+            override fun onSuccess(post: Post) {
+                dismissLoading()
+                resetAll()
+                listner!!.scrollToHome()
+            }
+
+            override fun onError(e: Exception) {
+                dismissLoading()
+            }
+        })
     }
 
     private fun showPickedPhoto() {
@@ -132,6 +186,7 @@ class UploadFragment : BaseFragment() {
     }
 
     private fun resetAll(){
+        allPhotos.clear()
         et_caption.text.clear()
         pickedPhoto = null
         fl_photo.visibility = View.GONE

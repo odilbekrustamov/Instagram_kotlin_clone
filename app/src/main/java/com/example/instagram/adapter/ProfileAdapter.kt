@@ -25,11 +25,14 @@ class ProfileAdapter(var fragment: ProfileFragment, var items: ArrayList<Post>):
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val post: Post = items[position]
+        val post: Post = items[items.size - position - 1]
         if (holder is PostViewHolder){
-            var iv_post = holder.iv_post
+            val iv_post = holder.iv_post
             setViewHeight(iv_post)
-            Glide.with(fragment).load(post.image).into(iv_post)
+            Glide.with(fragment).load(post.postImg).into(iv_post)
+
+            val tv_caption = holder.tv_caption
+            tv_caption.text = post.caption
         }
     }
 

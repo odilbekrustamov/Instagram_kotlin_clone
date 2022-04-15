@@ -56,7 +56,6 @@ class SignUpActivity : BaseActivity() {
 
     private fun firebaseSignUp(user: User) {
         showLoading(this)
-        Log.d("@@@@@", user.fullname + "  12 " + user.email + " 12 " + user.password + " 12 ")
         AuthManager.signUp(user.email, user.password, object : AuthHandler {
             override fun onSuccess(uid: String) {
                 user.uid = uid

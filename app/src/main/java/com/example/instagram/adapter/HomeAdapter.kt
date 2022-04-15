@@ -25,11 +25,26 @@ class HomeAdapter(var fragment: HomeFragment, var items: ArrayList<Post>): BaseA
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val post: Post = items[position]
+        val post: Post = items[items.size - position - 1]
         if (holder is PostViewHolder){
             val iv_post = holder.iv_post
+            val tv_fullname = holder.tv_fullname
+            val iv_profile = holder.iv_profile
+            val tv_caption = holder.tv_caption
+            val tv_time = holder.tv_time
 
-            Glide.with(fragment).load(post.image).into(iv_post)
+            tv_fullname.text = post.fullname
+            tv_caption.text = post.caption
+            tv_time.text = post.currentDate
+            Glide.with(fragment)
+                .load(post.userImg)
+                .placeholder(R.drawable.iv_percon)
+                .error(R.drawable.iv_percon)
+                .into(iv_profile)
+
+            Glide.with(fragment)
+                .load(post.postImg)
+                .into(iv_post)
         }
     }
 

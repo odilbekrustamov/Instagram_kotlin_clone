@@ -27,4 +27,20 @@ object StorageManager {
             handler.onError(e)
         }
     }
+
+    fun uploadPostPhoto(uri: Uri, handler: StorageHandler){
+        val filename = AuthManager.currentUser()!!.uid + "_" + System.currentTimeMillis().toString() + ".png"
+        val uploadTask: UploadTask = storageRef.child(POST_PHOTO_PATH).child(filename).putFile(uri)
+        uploadTask.addOnSuccessListener {
+            val result = it.metadata!!.reference!!.downloadUrl
+            result.addOnSuccessListener {
+                val imgUrl = it.toString()
+                handler.onSuccess(imgUrl)
+            }.addOnFailureListener { e ->
+                handler.onError(e)
+            }
+        }.addOnFailureListener{ e ->
+            handler.onError(e)
+        }
+    }
 }
