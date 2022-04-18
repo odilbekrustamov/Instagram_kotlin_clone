@@ -32,6 +32,22 @@ class SearchAdapter(var fragment: SearchFragment, var items: ArrayList<User>): B
                 .placeholder(R.drawable.iv_percon)
                 .error(R.drawable.iv_percon)
                 .into(holder.iv_profile)
+
+            val tv_follow = holder.tv_follow
+            tv_follow.setOnClickListener {
+                if (!user.isFollow){
+                    tv_follow.text = fragment.getString(R.string.str_following)
+                }else {
+                    tv_follow.text = fragment.getString(R.string.str_follow)
+                }
+                fragment.followOurUnfollow(user)
+            }
+
+            if (user.isFollow){
+                tv_follow.text = fragment.getString(R.string.str_follow)
+            }else {
+                tv_follow.text = fragment.getString(R.string.str_following)
+            }
         }
     }
 

@@ -2,6 +2,7 @@ package com.example.instagram.fragments
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,7 @@ import com.example.instagram.manager.AuthManager
 import com.example.instagram.manager.DatabaseManager
 import com.example.instagram.manager.handler.DBPostsHandler
 import com.example.instagram.model.Post
+import com.google.firebase.firestore.util.Logger
 import java.lang.RuntimeException
 
 
@@ -21,6 +23,7 @@ class HomeFragment : BaseFragment() {
     val TAG = HomeFragment::class.java.simpleName
     private var listner: HomeListner? = null
     private lateinit var recyclerView: RecyclerView
+    var feeds = ArrayList<Post>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,6 +32,13 @@ class HomeFragment : BaseFragment() {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
         initViews(view)
         return view
+    }
+
+    override fun setUserVisibleHint(isVisibleToUser: Boolean) {
+        if (isVisibleToUser && feeds.size> 0){
+            Log.d("@@@", "1236545687")
+            loadMyFeeds()
+        }
     }
 
     /**
@@ -74,7 +84,9 @@ class HomeFragment : BaseFragment() {
         DatabaseManager.loadFeeds(uid, object : DBPostsHandler {
             override fun onSuccess(posts: ArrayList<Post>) {
                 dismissLoading()
-                refreshAdapter(posts)
+                feeds.clear()
+                feeds.addAll(posts)
+                refreshAdapter(feeds)
             }
 
             override fun onError(e: Exception) {

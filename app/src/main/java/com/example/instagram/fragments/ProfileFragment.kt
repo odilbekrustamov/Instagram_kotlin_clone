@@ -20,6 +20,7 @@ import com.example.instagram.manager.DatabaseManager
 import com.example.instagram.manager.StorageManager
 import com.example.instagram.manager.handler.DBPostsHandler
 import com.example.instagram.manager.handler.DBUserHandler
+import com.example.instagram.manager.handler.DBUsersHandler
 import com.example.instagram.manager.handler.StorageHandler
 import com.example.instagram.model.Post
 import com.example.instagram.model.User
@@ -40,6 +41,8 @@ class ProfileFragment : Fragment() {
     lateinit var tv_fullname: TextView
     lateinit var tv_email: TextView
     lateinit var tv_posts: TextView
+    lateinit var tv_followers: TextView
+    lateinit var tv_following: TextView
 
     var pickedPhoto: Uri? = null
     var allPhotos = ArrayList<Uri>()
@@ -57,11 +60,11 @@ class ProfileFragment : Fragment() {
         tv_fullname = view.findViewById(R.id.tv_fullname)
         tv_email = view.findViewById(R.id.tv_email)
         tv_posts = view.findViewById(R.id.tv_posts)
+        tv_following = view.findViewById(R.id.tv_following)
+        tv_followers = view.findViewById(R.id.tv_followers)
 
         rv_profile = view.findViewById(R.id.rv_profile)
         rv_profile.layoutManager = GridLayoutManager(activity, 2)
-
-//        refreshAdapter(loadPosts())
 
         ic_logout = view.findViewById(R.id.ic_logout)
         ic_logout.setOnClickListener {
@@ -77,6 +80,36 @@ class ProfileFragment : Fragment() {
 
         loadUserInfo()
         loadMyPosts()
+        loadMyFollowing()
+        loadMyFollowers()
+    }
+
+    private fun loadMyFollowing() {
+        val uid = AuthManager.currentUser()!!.uid
+        DatabaseManager.loadFollowing(uid, object : DBUsersHandler{
+            override fun onSuccess(users: ArrayList<User>) {
+                tv_following.text = users.size.toString()
+            }
+
+            override fun onError(e: Exception) {
+
+            }
+
+        })
+    }
+
+    private fun loadMyFollowers() {
+        val uid = AuthManager.currentUser()!!.uid
+        DatabaseManager.loadFollowers(uid, object : DBUsersHandler{
+            override fun onSuccess(users: ArrayList<User>) {
+                tv_followers.text = users.size.toString()
+            }
+
+            override fun onError(e: Exception) {
+
+            }
+
+        })
     }
 
     private fun loadMyPosts() {
@@ -107,7 +140,7 @@ class ProfileFragment : Fragment() {
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             if (it.resultCode == Activity.RESULT_OK){
                 allPhotos =
-                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH) ?: arrayListOf()
+                    it.data?.getParcelableArrayListExtra(FishBun.INTENT_PATH)!!
                 pickedPhoto = allPhotos.get(0)
                 uploadPickedPhoto()
             }

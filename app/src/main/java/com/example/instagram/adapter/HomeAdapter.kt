@@ -37,8 +37,7 @@ class HomeAdapter(var fragment: HomeFragment, var items: ArrayList<Post>): BaseA
             tv_fullname.text = post.fullname
             tv_caption.text = post.caption
             tv_time.text = post.currentDate
-            Log.d("#@#@", post.currentDate)
-            Log.d("#@#@", post.fullname)
+
             Glide.with(fragment)
                 .load(post.userImg)
                 .placeholder(R.drawable.iv_percon)

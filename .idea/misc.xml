@@ -30,19 +30,27 @@
         <entry key="..\:/B - 13 VAZIFALAR/7 - mdul/1 - dars/Instagram/app/src/main/res/menu/navigation.xml" value="0.1" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - mdul/1 - dars/Instagram/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15989583333333332" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - mdul/1 - dars/Instagram/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.15989583333333332" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/drawable-v24/shape_circle_orange_light.xml" value="0.290625" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/drawable/edittext_rounded_corners.xml" value="0.290625" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/drawable/ic_add_photo.xml" value="0.290625" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/drawable/ic_plus.xml" value="0.290625" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/drawable/ic_plus_svgrepo_com.xml" value="0.290625" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/drawable/textview_rounded_corners.xml" value="0.290625" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/activity_main.xml" value="0.23777173913043478" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/activity_sign_in.xml" value="0.23777173913043478" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/custom_progress_dialog.xml" value="0.23958333333333334" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/fragment_favorite.xml" value="0.23958333333333334" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/fragment_home.xml" value="0.23958333333333334" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/fragment_profile.xml" value="0.24365942028985507" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/fragment_search.xml" value="0.24365942028985507" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/fragment_upload.xml" value="0.25" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/item_post_favorite.xml" value="0.25" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/item_post_home.xml" value="0.2536231884057971" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/item_post_profile.xml" value="0.23777173913043478" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/item_profile.xml" value="0.2" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/item_user.xml" value="0.264" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/layout/item_user_search.xml" value="0.23777173913043478" />
+        <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/menu/navigation.xml" value="0.27447916666666666" />
         <entry key="..\:/B - 13 VAZIFALAR/7 - modul/1 - dars/Instagram/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.290625" />
       </map>
     </option>
