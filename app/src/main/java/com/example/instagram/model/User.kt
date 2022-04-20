@@ -9,6 +9,10 @@ class User {
 
     var isFollow: Boolean = false
 
+    var device_id = ""
+    var device_type = "A"
+    var device_token = ""
+
     constructor(fullname: String, email: String){
         this.fullname = fullname
         this.email = email

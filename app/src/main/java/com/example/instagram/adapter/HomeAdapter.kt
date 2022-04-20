@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.fragments.HomeFragment
+import com.example.instagram.manager.AuthManager
 import com.example.instagram.model.Post
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -33,6 +34,8 @@ class HomeAdapter(var fragment: HomeFragment, var items: ArrayList<Post>): BaseA
             val iv_profile = holder.iv_profile
             val tv_caption = holder.tv_caption
             val tv_time = holder.tv_time
+            val iv_like = holder.iv_like
+            var iv_more = holder.iv_more
 
             tv_fullname.text = post.fullname
             tv_caption.text = post.caption
@@ -47,6 +50,33 @@ class HomeAdapter(var fragment: HomeFragment, var items: ArrayList<Post>): BaseA
             Glide.with(fragment)
                 .load(post.postImg)
                 .into(iv_post)
+
+            iv_like.setOnClickListener {
+                if (post.isLiked){
+                    post.isLiked = false
+                    iv_like.setImageResource(R.mipmap.ic_favorite_not)
+                }else {
+                    post.isLiked = true
+                    iv_like.setImageResource(R.mipmap.ic_favorite)
+                }
+                fragment.likeOrUnlikePost(post)
+            }
+
+            if (post.isLiked){
+                iv_like.setImageResource(R.mipmap.ic_favorite)
+            }else {
+                iv_like.setImageResource(R.mipmap.ic_favorite_not)
+            }
+
+            val uid = AuthManager.currentUser()!!.uid
+            if (uid == post.uid){
+                iv_more.visibility = View.VISIBLE
+            }else {
+                iv_more.visibility = View.GONE
+            }
+            iv_more.setOnClickListener {
+                fragment.showDeleteDialog(post)
+            }
         }
     }
 

@@ -8,6 +8,7 @@ class Post {
     var caption: String = ""
     var postImg: String = ""
     var currentDate: String = currentTime()
+    var isLiked: Boolean = false
 
     var uid: String = ""
     var fullname: String = ""

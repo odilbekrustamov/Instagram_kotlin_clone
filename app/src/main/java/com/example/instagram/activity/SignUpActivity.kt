@@ -10,9 +10,11 @@ import com.example.instagram.R
 import com.example.instagram.manager.handler.AuthHandler
 import com.example.instagram.manager.AuthManager
 import com.example.instagram.manager.DatabaseManager
+import com.example.instagram.manager.PrefsManager
 import com.example.instagram.manager.handler.DBUserHandler
 import com.example.instagram.model.User
 import com.example.instagram.utils.Extensions.toast
+import com.example.instagram.utils.Utils
 
 /**
  * In SignUpActivity, user can sighup using fullname, email, password
@@ -71,6 +73,9 @@ class SignUpActivity : BaseActivity() {
     }
 
     private fun storeUserToDB(user: User) {
+        user.device_token = PrefsManager(this).loadDeviceToken()!!
+        user.device_id = Utils.getDeviceID(this)
+
       DatabaseManager.storeUser(user, object : DBUserHandler{
           override fun onSuccess(user: User?) {
               dismissLoading()

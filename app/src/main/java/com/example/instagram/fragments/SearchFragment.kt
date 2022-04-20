@@ -72,22 +72,6 @@ class SearchFragment : BaseFragment() {
         refreshAdapter(users)
     }
 
-   /* private fun loadUsers(): ArrayList<User> {
-       DatabaseManager.loadUsers(object : DBUsersHandler{
-           override fun onSuccess(users: ArrayList<User>) {
-               items.clear()
-               items.addAll(users)
-               refreshAdapter(items)
-           }
-
-           override fun onError(e: Exception) {
-
-           }
-
-       })
-        return items
-    }*/
-
     fun followOurUnfollow(to: User) {
         val uid = AuthManager.currentUser()!!.uid
         if (!to.isFollow){

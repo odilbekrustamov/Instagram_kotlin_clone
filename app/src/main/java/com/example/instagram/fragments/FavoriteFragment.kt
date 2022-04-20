@@ -10,9 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.instagram.R
 import com.example.instagram.adapter.FavoriteAdapter
 import com.example.instagram.adapter.HomeAdapter
+import com.example.instagram.manager.AuthManager
+import com.example.instagram.manager.DatabaseManager
+import com.example.instagram.manager.handler.DBPostHandler
+import com.example.instagram.manager.handler.DBPostsHandler
 import com.example.instagram.model.Post
+import com.example.instagram.utils.DialogListener
+import com.example.instagram.utils.Utils
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : BaseFragment() {
     lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -28,7 +34,30 @@ class FavoriteFragment : Fragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = GridLayoutManager(activity, 1)
 
-        refreshAdapter(loadPost())
+        loadLikedFeeds()
+    }
+
+    fun likeOrUnLikePost(post: Post){
+        val uid = AuthManager.currentUser()!!.uid
+        DatabaseManager.likeFeedPost(uid, post)
+
+        loadLikedFeeds()
+    }
+
+    private fun loadLikedFeeds() {
+        showLoading(requireActivity())
+        val uid = AuthManager.currentUser()!!.uid
+        DatabaseManager.loadLikeFeeds(uid, object : DBPostsHandler{
+            override fun onSuccess(posts: ArrayList<Post>) {
+                dismissLoading()
+                refreshAdapter(posts)
+            }
+
+            override fun onError(e: Exception) {
+                dismissLoading()
+            }
+
+        })
     }
 
     private fun refreshAdapter(items: ArrayList<Post>) {
@@ -36,8 +65,29 @@ class FavoriteFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
-    private fun loadPost(): ArrayList<Post> {
-        val items = ArrayList<Post>()
-        return items
+    fun showDeleteDialog(post: Post) {
+        Utils.dialogDouble(requireContext(), getString(R.string.str_delete_post), object :
+            DialogListener {
+            override fun onCallback(isChosen: Boolean) {
+                if (isChosen){
+                    deletePost(post)
+                }
+            }
+
+        })
     }
+
+    private fun deletePost(post: Post) {
+        DatabaseManager.deletePost(post, object : DBPostHandler {
+            override fun onSuccess(post: Post) {
+                loadLikedFeeds()
+            }
+
+            override fun onError(e: Exception) {
+
+            }
+
+        })
+    }
+
 }

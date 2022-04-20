@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.example.instagram.R
 import com.example.instagram.fragments.FavoriteFragment
 import com.example.instagram.fragments.HomeFragment
+import com.example.instagram.manager.AuthManager
 import com.example.instagram.model.Post
 import com.google.android.material.imageview.ShapeableImageView
 
@@ -29,8 +30,47 @@ class FavoriteAdapter(var fragment: FavoriteFragment, var items: ArrayList<Post>
         val post: Post = items[position]
         if (holder is PostViewHolder){
             val iv_post = holder.iv_post
+            val tv_fullname = holder.tv_fullname
+            val iv_profile = holder.iv_profile
+            val tv_caption = holder.tv_caption
+            val tv_time = holder.tv_time
+            val iv_like = holder.iv_like
+            var iv_more = holder.iv_more
 
-            Glide.with(fragment).load(post.userImg).into(iv_post)
+
+            Glide.with(fragment).load(post.postImg).into(iv_post)
+            Glide.with(fragment).load(post.userImg).into(iv_profile)
+
+            tv_fullname.text = post.fullname
+            tv_caption.text = post.caption
+            tv_time.text = post.currentDate
+
+            iv_like.setOnClickListener {
+                if (post.isLiked){
+                    post.isLiked = false
+                    iv_like.setImageResource(R.mipmap.ic_favorite_not)
+                }else {
+                    post.isLiked = true
+                    iv_like.setImageResource(R.mipmap.ic_favorite)
+                }
+                fragment.likeOrUnLikePost(post)
+            }
+
+            if (post.isLiked){
+                iv_like.setImageResource(R.mipmap.ic_favorite)
+            }else {
+                iv_like.setImageResource(R.mipmap.ic_favorite_not)
+            }
+
+            val uid = AuthManager.currentUser()!!.uid
+            if (uid == post.uid){
+                iv_more.visibility = View.VISIBLE
+            }else {
+                iv_more.visibility = View.GONE
+            }
+            iv_more.setOnClickListener {
+                fragment.showDeleteDialog(post)
+            }
         }
     }
 

@@ -2,7 +2,6 @@ package com.example.instagram.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,9 +12,11 @@ import com.example.instagram.R
 import com.example.instagram.adapter.HomeAdapter
 import com.example.instagram.manager.AuthManager
 import com.example.instagram.manager.DatabaseManager
+import com.example.instagram.manager.handler.DBPostHandler
 import com.example.instagram.manager.handler.DBPostsHandler
 import com.example.instagram.model.Post
-import com.google.firebase.firestore.util.Logger
+import com.example.instagram.utils.DialogListener
+import com.example.instagram.utils.Utils
 import java.lang.RuntimeException
 
 
@@ -36,7 +37,6 @@ class HomeFragment : BaseFragment() {
 
     override fun setUserVisibleHint(isVisibleToUser: Boolean) {
         if (isVisibleToUser && feeds.size> 0){
-            Log.d("@@@", "1236545687")
             loadMyFeeds()
         }
     }
@@ -64,7 +64,6 @@ class HomeFragment : BaseFragment() {
         recyclerView = view.findViewById(R.id.recyclerView)
         recyclerView.layoutManager = GridLayoutManager(activity, 1)
 
-
         val iv_camera = view.findViewById<ImageView>(R.id.iv_camera)
         iv_camera.setOnClickListener {
             listner!!.scrollToUpload()
@@ -91,6 +90,35 @@ class HomeFragment : BaseFragment() {
 
             override fun onError(e: Exception) {
                 dismissLoading()
+            }
+
+        })
+    }
+
+    fun likeOrUnlikePost(post: Post) {
+        val uid = AuthManager.currentUser()!!.uid
+        DatabaseManager.likeFeedPost(uid, post)
+    }
+
+    fun showDeleteDialog(post: Post) {
+        Utils.dialogDouble(requireContext(), getString(R.string.str_delete_post), object : DialogListener{
+            override fun onCallback(isChosen: Boolean) {
+                if (isChosen){
+                    deletePost(post)
+                }
+            }
+
+        })
+    }
+
+    private fun deletePost(post: Post) {
+        DatabaseManager.deletePost(post, object : DBPostHandler{
+            override fun onSuccess(post: Post) {
+                loadMyFeeds()
+            }
+
+            override fun onError(e: Exception) {
+
             }
 
         })

@@ -1,11 +1,14 @@
 package com.example.instagram.activity
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.view.WindowManager
 import com.example.instagram.R
 import com.example.instagram.manager.AuthManager
+import com.example.instagram.manager.PrefsManager
+import com.example.instagram.utils.Logger
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 
 /**
  * In SplashActivity, user can visit to SignInActivity or MainActivity
@@ -23,6 +26,7 @@ class SplashActivity : BaseActivity() {
 
     private fun initViews() {
         countDownTimer()
+        loadFCMToken()
     }
 
     private fun countDownTimer() {
@@ -41,5 +45,17 @@ class SplashActivity : BaseActivity() {
         }.start()
     }
 
-
+    private fun loadFCMToken() {
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                Logger.d(TAG, "Fetching FCM registration token failed")
+                return@OnCompleteListener
+            }
+            // Get new FCM registration token
+            // Save it in locally to use later
+            val token = task.result
+            Logger.d(TAG, token.toString())
+            PrefsManager(this).storeDeviceToken(token.toString())
+        })
+    }
 }
