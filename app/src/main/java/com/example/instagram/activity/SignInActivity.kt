@@ -9,6 +9,7 @@ import android.widget.TextView
 import com.example.instagram.R
 import com.example.instagram.manager.handler.AuthHandler
 import com.example.instagram.manager.AuthManager
+import com.example.instagram.utils.DeepLink
 import com.example.instagram.utils.Extensions.toast
 import java.lang.Exception
 
@@ -31,6 +32,10 @@ class SignInActivity : BaseActivity() {
     }
 
     private fun initViews() {
+
+        val tv_link = findViewById<TextView>(R.id.tv_link)
+        DeepLink.retrieveLink(intent, tv_link)
+
         et_email = findViewById(R.id.et_email)
         et_password  =findViewById(R.id.et_password)
         val b_signin = findViewById<Button>(R.id.b_signin)

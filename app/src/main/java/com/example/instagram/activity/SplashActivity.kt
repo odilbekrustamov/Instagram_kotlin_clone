@@ -6,6 +6,7 @@ import android.view.WindowManager
 import com.example.instagram.R
 import com.example.instagram.manager.AuthManager
 import com.example.instagram.manager.PrefsManager
+import com.example.instagram.utils.DeepLink
 import com.example.instagram.utils.Logger
 import com.google.android.gms.tasks.OnCompleteListener
 import com.google.firebase.messaging.FirebaseMessaging
@@ -27,6 +28,8 @@ class SplashActivity : BaseActivity() {
     private fun initViews() {
         countDownTimer()
         loadFCMToken()
+        //DeepLink.createLongLink("123456789")
+        DeepLink.createShortLink("654321")
     }
 
     private fun countDownTimer() {
