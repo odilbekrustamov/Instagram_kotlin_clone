@@ -3,12 +3,15 @@ package com.example.instagram.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import com.example.instagram.R
 import com.example.instagram.manager.handler.AuthHandler
 import com.example.instagram.manager.AuthManager
+import com.example.instagram.manager.FirebaseConfig
 import com.example.instagram.utils.DeepLink
 import com.example.instagram.utils.Extensions.toast
 import java.lang.Exception
@@ -33,6 +36,9 @@ class SignInActivity : BaseActivity() {
 
     private fun initViews() {
 
+        val ll_background = findViewById<LinearLayout>(R.id.ll_background)
+        val tv_instagram = findViewById<TextView>(R.id.tvInstagram)
+
         val tv_link = findViewById<TextView>(R.id.tv_link)
         DeepLink.retrieveLink(intent, tv_link)
 
@@ -40,14 +46,21 @@ class SignInActivity : BaseActivity() {
         et_password  =findViewById(R.id.et_password)
         val b_signin = findViewById<Button>(R.id.b_signin)
         b_signin.setOnClickListener {
-            val email = et_email.text.toString()
-            val password = et_password.text.toString()
-            if (email.isNotEmpty() && password.isNotEmpty()) {
-                firebaseSignIn(email, password)
-            }
+            FirebaseConfig(ll_background, tv_instagram).updateConfig()
+            Log.d(TAG, "initViews: ")
+//            val email = et_email.text.toString()
+//            val password = et_password.text.toString()
+//            if (email.isNotEmpty() && password.isNotEmpty()) {
+//                firebaseSignIn(email, password)
+//            }
+//
+//            val str1 = reverse(email)
+//            val str2 = reverse(password)
         }
         val tv_signup = findViewById<TextView>(R.id.tv_signup)
         tv_signup.setOnClickListener { callSignUpActivity() }
+
+        FirebaseConfig(ll_background, tv_instagram).applyConfig()
     }
 
     private fun firebaseSignIn(email: String, password: String) {
@@ -69,6 +82,22 @@ class SignInActivity : BaseActivity() {
     private fun callSignUpActivity() {
         val intent = Intent(this, SignUpActivity::class.java)
         startActivity(intent)
+    }
+
+    fun reverse(string: String): String{
+        val chars = string.toCharArray()
+
+        var l = 0
+        var b = string.length - 1
+        while (l < b){
+            val c = chars[l]
+            chars[l] = chars[b]
+            chars[b] = c
+            l++
+            b--
+        }
+
+        return String(chars)
     }
 
 }
