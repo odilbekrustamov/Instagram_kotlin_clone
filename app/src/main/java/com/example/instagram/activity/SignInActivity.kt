@@ -60,7 +60,7 @@ class SignInActivity : BaseActivity() {
         val tv_signup = findViewById<TextView>(R.id.tv_signup)
         tv_signup.setOnClickListener { callSignUpActivity() }
 
-        FirebaseConfig(ll_background, tv_instagram).applyConfig()
+       // FirebaseConfig(ll_background, tv_instagram).applyConfig()
     }
 
     private fun firebaseSignIn(email: String, password: String) {

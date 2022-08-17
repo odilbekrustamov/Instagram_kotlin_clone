@@ -290,7 +290,7 @@ object DatabaseManager {
                     post.currentDate = currentDate!!
                     post.fullname = fullname!!
                     post.userImg = userImg!!
-                    post.isLiked = isLiked!!
+                    post.isLiked = isLiked
                     posts.add(post)
                 }
                 handler.onSuccess(posts)
